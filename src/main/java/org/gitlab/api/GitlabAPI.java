@@ -123,6 +123,12 @@ public class GitlabAPI {
         return retrieve().getAll(tailUrl, GitlabUser[].class);
     }
 
+    public List<GitlabUser> getLastUpdateUsers() throws IOException {
+        String tailUrl = GitlabUser.URL + PARAM_MAX_ITEMS_PER_PAGE + "&order_by=updated_at";
+        GitlabUser[] response = retrieve().to(tailUrl, GitlabUser[].class);
+        return Arrays.asList(response);
+    }
+
     /**
      * Finds users by email address or username.
      * @param emailOrUsername Some portion of the email address or username
